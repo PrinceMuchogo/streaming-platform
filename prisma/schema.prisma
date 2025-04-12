@@ -94,4 +94,79 @@ enum OrderStatus {
   CANCELLED
 }
 
+model Subscription {
+  id         String   @id @default(uuid())
+  userId     String
+  contentId  String?
+  artistId   String?
 
+  // One of the above must be non-null
+  user       User     @relation("UserSubscriptions", fields: [userId], references: [id])
+  content    Content? @relation(fields: [contentId], references: [id])
+  artist     User?    @relation(fields: [artistId], references: [id])
+
+  startDate  DateTime @default(now())
+  endDate    DateTime?
+  isActive   Boolean  @default(true)
+}
+
+model Transaction {
+  id          String   @id @default(uuid())
+  userId      String
+  contentId   String?
+  amount      Float
+  currency    String   // e.g., USD, ETH, etc.
+  type        TransactionType
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id])
+  content     Content? @relation(fields: [contentId], references: [id])
+}
+
+enum TransactionType {
+  SUBSCRIPTION
+  DONATION
+  TIP
+  LICENSE_PURCHASE
+}
+
+model FanEngagement {
+  id        String   @id @default(uuid())
+  userId    String
+  contentId String
+  action    EngagementAction
+  value     Int      // e.g., 10 points for a like
+
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  content   Content  @relation(fields: [contentId], references: [id])
+}
+
+enum EngagementAction {
+  LIKE
+  COMMENT
+  SHARE
+  VIEW
+}
+
+model Favorite {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+
+  contentId  String?  // Optional if favoriting content
+  content    Content? @relation(fields: [contentId], references: [id])
+
+  productId  String?  // Optional if favoriting product
+  product    Product? @relation(fields: [productId], references: [id])
+
+  brandId    String?  // Optional if favoriting brand
+  brand      Brand?   @relation(fields: [brandId], references: [id])
+
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, contentId])
+  @@unique([userId, productId])
+  @@unique([userId, brandId])
+}
