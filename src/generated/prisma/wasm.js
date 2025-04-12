@@ -170,24 +170,6 @@ exports.Prisma.ProductScalarFieldEnum = {
   storeId: 'storeId'
 };
 
-exports.Prisma.ReviewScalarFieldEnum = {
-  id: 'id',
-  userID: 'userID',
-  productID: 'productID',
-  review: 'review',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.RatingScalarFieldEnum = {
-  id: 'id',
-  userID: 'userID',
-  productID: 'productID',
-  rating: 'rating',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.ProductImageScalarFieldEnum = {
   id: 'id',
   productImage: 'productImage',
@@ -234,6 +216,7 @@ exports.Prisma.SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   contentId: 'contentId',
+  artistId: 'artistId',
   paymentId: 'paymentId',
   startDate: 'startDate',
   endDate: 'endDate',
@@ -272,6 +255,24 @@ exports.Prisma.AcknowledgementScalarFieldEnum = {
   updateAt: 'updateAt'
 };
 
+exports.Prisma.ReviewScalarFieldEnum = {
+  id: 'id',
+  userID: 'userID',
+  productID: 'productID',
+  review: 'review',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RatingScalarFieldEnum = {
+  id: 'id',
+  userID: 'userID',
+  productID: 'productID',
+  rating: 'rating',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -293,8 +294,6 @@ exports.Prisma.ModelName = {
   content: 'content',
   store: 'store',
   product: 'product',
-  review: 'review',
-  rating: 'rating',
   productImage: 'productImage',
   payment: 'payment',
   order: 'order',
@@ -302,7 +301,9 @@ exports.Prisma.ModelName = {
   subscription: 'subscription',
   FanEngagement: 'FanEngagement',
   favourite_content: 'favourite_content',
-  acknowledgement: 'acknowledgement'
+  acknowledgement: 'acknowledgement',
+  review: 'review',
+  rating: 'rating'
 };
 
 /**
