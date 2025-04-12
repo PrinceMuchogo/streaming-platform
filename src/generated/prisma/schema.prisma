@@ -16,7 +16,7 @@ datasource db {
 
 model user {
   id                   String              @id @default(uuid())
-  fullname             String
+  fullname             String?
   email                String              @unique @db.VarChar(255)
   password             String?
   profile_image_url    String?
@@ -32,24 +32,25 @@ model user {
   payment              payment[]
   content              content[]
   store                store[]
-  review               review[]
-  rating               rating[]
   subscription         subscription[]
   FanEngagement        FanEngagement[]
   favourite_content    favourite_content[]
+  review               review[]
+  rating               rating[]
 }
 
 model content {
-  id                String              @id @default(uuid())
-  title             String
-  description       String?
-  mediaUrl          String
-  thumbnailUrl      String?
-  isPublished       Boolean             @default(false)
-  category          String?
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  storeId           String
+  id           String   @id @default(uuid())
+  title        String
+  description  String?
+  mediaUrl     String
+  thumbnailUrl String?
+  isPublished  Boolean  @default(false)
+  category     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  storeId      String
+
   artistId          String
   artist            user                @relation(fields: [artistId], references: [id])
   store             store               @relation(fields: [storeId], references: [id])
@@ -92,28 +93,6 @@ model product {
   ratings           rating[]
   reviews           review[]
   favourite_content favourite_content[]
-}
-
-model review {
-  id        String   @id @default(uuid())
-  userID    String?
-  productID String?
-  review    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  product   product? @relation(fields: [productID], references: [id])
-  user      user?    @relation(fields: [userID], references: [id])
-}
-
-model rating {
-  id        String   @id @default(uuid())
-  userID    String?
-  productID String?
-  rating    Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  product   product? @relation(fields: [productID], references: [id])
-  user      user?    @relation(fields: [userID], references: [id])
 }
 
 model productImage {
@@ -170,9 +149,12 @@ model orderProducts {
 }
 
 model subscription {
-  id        String    @id @default(uuid())
+  id        String  @id @default(uuid())
   userId    String
   contentId String?
+  artistId  String?
+
+  // One of the above must be non-null
   user      user      @relation(fields: [userId], references: [id])
   content   content?  @relation(fields: [contentId], references: [id])
   paymentId String?
@@ -223,4 +205,26 @@ model acknowledgement {
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
   user      user     @relation(fields: [userId], references: [id])
+}
+
+model review {
+  id        String   @id @default(uuid())
+  userID    String?
+  productID String?
+  review    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   product? @relation(fields: [productID], references: [id])
+  user      user?    @relation(fields: [userID], references: [id])
+}
+
+model rating {
+  id        String   @id @default(uuid())
+  userID    String?
+  productID String?
+  rating    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   product? @relation(fields: [productID], references: [id])
+  user      user?    @relation(fields: [userID], references: [id])
 }
