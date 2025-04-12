@@ -4,7 +4,6 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import FlexRightSidebar from "@/components/Sidebar/FlexRightSideBar";
 import LeftBarLayout from "@/components/Layouts/LeftBarLayout";
 import React from "react";
-import "next-cloudinary/dist/cld-video-player.css";
 import { useEffect } from "react";
 import { useState } from "react";
 import { videos } from "@/types/video";

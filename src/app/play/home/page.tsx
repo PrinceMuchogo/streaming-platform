@@ -3,7 +3,6 @@
 import FlexRightSidebar from "@/components/Sidebar/FlexRightSideBar";
 import LeftBarLayout from "@/components/Layouts/LeftBarLayout";
 import React from "react";
-import "next-cloudinary/dist/cld-video-player.css";
 import { useEffect, useState } from "react";
 import { videos } from "@/types/video";
 import FeedCard from "@/components/FeedCard";

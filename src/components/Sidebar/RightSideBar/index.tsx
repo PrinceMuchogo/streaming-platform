@@ -165,16 +165,15 @@ const RightSidebar = () => {
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Powered by{" "}
           <a
-            href="https://genztechlab.com"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-primary hover:underline"
           >
-            GenzTechLabs
+           TechStack
           </a>
         </p>
       </div>
-      {/*End Powered by GenzTechLabs */}
     </aside>
   );
 };

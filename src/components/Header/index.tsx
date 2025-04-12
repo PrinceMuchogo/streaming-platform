@@ -58,7 +58,7 @@ const Header = (props: {
               href="/"
               className="block flex-shrink-0 transition-transform hover:scale-105 lg:hidden"
             >
-              Code Red Studios
+              Streamify
             </Link>
           </div>
         </div>

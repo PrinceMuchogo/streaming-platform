@@ -27,7 +27,7 @@ const LeftSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             className="block flex-shrink-0 transition-transform hover:scale-105"
           >
             <h1 className="bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 bg-clip-text text-2xl font-extrabold tracking-wider text-transparent">
-              Code Red Studios
+              Streamify
             </h1>
           </Link>
 

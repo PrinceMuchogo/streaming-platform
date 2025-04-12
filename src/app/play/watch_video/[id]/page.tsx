@@ -3,7 +3,6 @@
 import LeftBarLayout from "@/components/Layouts/LeftBarLayout";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import "next-cloudinary/dist/cld-video-player.css";
 
 import WatchVideo from "@/components/Video/WatchVideo";
 import FlexRightSidebar from "@/components/Sidebar/FlexRightSideBar";
