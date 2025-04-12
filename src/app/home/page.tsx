@@ -7,7 +7,16 @@ import useStore from "@/zustand/videoStore";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { Play, Flame, Film, Users, Globe, HeartHandshake } from "lucide-react";
+import {
+  Play,
+  Flame,
+  Film,
+  Users,
+  Globe,
+  HeartHandshake,
+  Music,
+  Paintbrush,
+} from "lucide-react";
 import AdminPage from "@/components/Dashboard/Admin";
 
 export default function Home() {
@@ -17,7 +26,7 @@ export default function Home() {
   const router = useRouter();
   const { setVideos } = useStore();
 
-  console.log("role: ", session?.user.role)
+  console.log("role: ", session?.user.role);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -100,45 +109,45 @@ export default function Home() {
 
                     {/* Features */}
                     <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                      <div className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
-                        <Globe className="mx-auto h-8 w-8 text-red-500" />
+                      <Link href={"#"} className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
+                        <Music className="mx-auto h-8 w-8 text-red-500" />
                         <h3 className="mt-4 text-lg font-semibold text-white">
                           Stream Anywhere
                         </h3>
                         <p className="mt-2 text-sm text-gray-400">
-                          Watch your favorite content on any device, anywhere in
+                          Stream your favorite music on any device, anywhere in
                           the world
                         </p>
-                      </div>
-                      <div className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
+                      </Link>
+                      <Link href={"/play/home"} className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
                         <Film className="mx-auto h-8 w-8 text-pink-500" />
                         <h3 className="mt-4 text-lg font-semibold text-white">
-                          Exclusive Content
+                          Exclusive Video Content
                         </h3>
                         <p className="mt-2 text-sm text-gray-400">
                           Access premium content you won&apos;t find anywhere
                           else
                         </p>
-                      </div>
-                      <div className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
-                        <Users className="mx-auto h-8 w-8 text-yellow-500" />
+                      </Link>
+                      <Link href={"/gallery"} className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
+                        <Paintbrush className="mx-auto h-8 w-8 text-yellow-500" />
                         <h3 className="mt-4 text-lg font-semibold text-white">
-                          Community
+                          ArtWork
                         </h3>
                         <p className="mt-2 text-sm text-gray-400">
-                          Join a growing community of entertainment
+                          Discover the world of Art
                         </p>
-                      </div>
-                      <div className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
+                      </Link>
+                      <Link href={"#"} className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
                         <HeartHandshake className="mx-auto h-8 w-8 text-yellow-500" />
                         <h3 className="mt-4 text-lg font-semibold text-white">
                           Support
                         </h3>
                         <p className="mt-2 text-sm text-gray-400">
-                          Support by joining a growing community of
-                          entertainment enthusiasts
+                          Support by donating to the growing community of
+                          artists
                         </p>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
