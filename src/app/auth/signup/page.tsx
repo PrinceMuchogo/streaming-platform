@@ -15,6 +15,8 @@ export default function Signup() {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "",
+    category: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -23,6 +25,15 @@ export default function Signup() {
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    if (name === "password") {
+      validatePasswordStrength(value);
+    }
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
@@ -40,7 +51,7 @@ export default function Signup() {
     } else {
       setIsPasswordStrong(false);
       setPasswordError(
-        "Password must be at least 8 characters, include a number, and a special character."
+        "Password must be at least 8 characters, include a number, and a special character.",
       );
     }
   };
@@ -83,7 +94,7 @@ export default function Signup() {
       {/* Dynamic Background */}
       <div className="absolute inset-0 bg-[url('/images/bgimage.jpg')] bg-cover bg-center bg-no-repeat">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-red-950/30"></div>
-        <div className="absolute inset-0 mix-blend-overlay opacity-20"></div>
+        <div className="absolute inset-0 opacity-20 mix-blend-overlay"></div>
       </div>
 
       {/* Animated Shapes */}
@@ -96,15 +107,18 @@ export default function Signup() {
         {/* Header */}
         <header className="relative z-50">
           <nav className="px-4 py-6 sm:px-6 sm:py-8">
-            <Link href="/" className="group relative inline-flex items-center gap-2">
+            <Link
+              href="/"
+              className="group relative inline-flex items-center gap-2"
+            >
               <div className="relative flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12">
-                <div className="absolute inset-0 animate-spin-slow rounded-full bg-gradient-to-tr from-red-500 to-yellow-500 blur-sm"></div>
+                <div className="animate-spin-slow absolute inset-0 rounded-full bg-gradient-to-tr from-red-500 to-yellow-500 blur-sm"></div>
                 <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-black sm:h-10 sm:w-10">
                   <Flame className="h-5 w-5 text-red-500 sm:h-6 sm:w-6" />
                 </div>
               </div>
               <span className="text-xl font-bold tracking-tighter text-white sm:text-2xl">
-                Code Red Studios
+                Streamify
               </span>
             </Link>
           </nav>
@@ -121,7 +135,7 @@ export default function Signup() {
                     Create your account
                   </h2>
                   <p className="mt-2 text-sm text-gray-400">
-                    Join Code Red Studios to start streaming your favorite content
+                    Join Streamify to start streaming your favorite content
                   </p>
                 </div>
 
@@ -165,6 +179,32 @@ export default function Signup() {
                       onChange={handleChange}
                       required
                     />
+                    <select
+                      id="role"
+                      name="role"
+                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 font-light text-gray-500 placeholder:text-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      required
+                      value={formData.role}
+                      onChange={handleSelectChange}
+                    >
+                      <option value="">Select if you are an artist</option>
+                      <option value="artist">Artist</option>
+                    </select>
+                    {formData.role == "artist" && (
+                      <select
+                        id="category"
+                        name="category"
+                        className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 font-light text-gray-500 placeholder:text-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                        required
+                        value={formData.category}
+                        onChange={handleSelectChange}
+                      >
+                        <option value="">Select category</option>
+                        <option value="music">Music Streaming</option>
+                        <option value="video">Video Streaming</option>
+                        <option value="art">Art</option>
+                      </select>
+                    )}
                     <input
                       type="password"
                       name="password"
@@ -231,7 +271,8 @@ export default function Signup() {
                       Join Our Community
                     </h2>
                     <p className="mt-4 text-lg text-gray-300">
-                      Create an account to start your entertainment journey with Code Red Studios
+                      Create an account to start your entertainment journey with
+                      Streamify
                     </p>
                   </div>
                 </div>
@@ -245,7 +286,8 @@ export default function Signup() {
           <div className="bg-black/40 backdrop-blur-sm">
             <div className="px-4 py-4 sm:px-6">
               <p className="text-center text-xs text-gray-400 sm:text-sm">
-                &copy; {new Date().getFullYear()} Code Red Studios. All rights reserved.
+                &copy; {new Date().getFullYear()} Streamify. All rights
+                reserved.
               </p>
             </div>
           </div>

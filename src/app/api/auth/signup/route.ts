@@ -14,7 +14,8 @@ export async function POST(req: Request) {
       password: hashedPassword,
       profile_image_url:
         "https://res.cloudinary.com/duldhfyx0/image/upload/v1731957740/mcinzgi7vlkz3q96warm.jpg",
-      role: "user",
+      role: data.role == "" ? "user" : data.role,
+      category: data.category,
     };
 
     const find_user = await prisma.user.findUnique({

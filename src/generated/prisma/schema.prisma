@@ -1,0 +1,226 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id                   String              @id @default(uuid())
+  fullname             String
+  email                String              @unique @db.VarChar(255)
+  password             String?
+  profile_image_url    String?
+  uploadedProfileImage String?
+  category             String?
+  imagePublicID        String?
+  role                 String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  username             String
+  acknowledgements     acknowledgement[]
+  order                order[]
+  payment              payment[]
+  content              content[]
+  store                store[]
+  review               review[]
+  rating               rating[]
+  subscription         subscription[]
+  FanEngagement        FanEngagement[]
+  favourite_content    favourite_content[]
+}
+
+model content {
+  id                String              @id @default(uuid())
+  title             String
+  description       String?
+  mediaUrl          String
+  thumbnailUrl      String?
+  isPublished       Boolean             @default(false)
+  category          String?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  storeId           String
+  artistId          String
+  artist            user                @relation(fields: [artistId], references: [id])
+  store             store               @relation(fields: [storeId], references: [id])
+  subscription      subscription[]
+  FanEngagement     FanEngagement[]
+  favourite_content favourite_content[]
+}
+
+model store {
+  id                String              @id @default(uuid())
+  storeName         String?             @unique @db.VarChar(255)
+  storeLogo         String?
+  imagePublicID     String?
+  storeOwnerID      String?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  order             order[]
+  payment           payment[]
+  products          product[]
+  userId            String?
+  storeOwner        user?               @relation(fields: [storeOwnerID], references: [id])
+  content           content[]
+  favourite_content favourite_content[]
+}
+
+model product {
+  id                String              @id @default(uuid())
+  productName       String              @db.VarChar(255)
+  description       String              @db.VarChar(255)
+  productImageID    String?
+  quantity          Int?
+  price             String              @db.VarChar(255)
+  rating            Decimal?            @db.Decimal(1, 1)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  storeId           String?
+  orderProducts     orderProducts[]
+  productImage      productImage?       @relation(fields: [productImageID], references: [productImageID])
+  store             store?              @relation(fields: [storeId], references: [id])
+  ratings           rating[]
+  reviews           review[]
+  favourite_content favourite_content[]
+}
+
+model review {
+  id        String   @id @default(uuid())
+  userID    String?
+  productID String?
+  review    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   product? @relation(fields: [productID], references: [id])
+  user      user?    @relation(fields: [userID], references: [id])
+}
+
+model rating {
+  id        String   @id @default(uuid())
+  userID    String?
+  productID String?
+  rating    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   product? @relation(fields: [productID], references: [id])
+  user      user?    @relation(fields: [userID], references: [id])
+}
+
+model productImage {
+  id             String    @id @default(uuid())
+  productImage   String?
+  imagePublicID  String?
+  productImageID String?   @unique @db.VarChar(255)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  product        product[]
+}
+
+model payment {
+  id            String         @id @default(uuid())
+  userID        String?
+  storeID       String?
+  amount        Decimal        @db.Decimal(12, 10)
+  paymentMethod String?
+  paymentStatus String?
+  type          String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  orderId       String?
+  paymentRef    String?
+  order         order?         @relation(fields: [orderId], references: [id])
+  store         store?         @relation(fields: [storeID], references: [id])
+  user          user?          @relation(fields: [userID], references: [id])
+  subscription  subscription[]
+}
+
+model order {
+  id              String          @id @default(uuid())
+  userID          String?
+  storeID         String?
+  shippingAddress String?
+  amount          Decimal         @db.Decimal(12, 10)
+  status          String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  store           store?          @relation(fields: [storeID], references: [id])
+  user            user?           @relation(fields: [userID], references: [id])
+  orderProducts   orderProducts[]
+  payment         payment[]
+}
+
+model orderProducts {
+  id        String   @id @default(uuid())
+  orderID   String?
+  productID String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order     order?   @relation(fields: [orderID], references: [id])
+  product   product? @relation(fields: [productID], references: [id])
+}
+
+model subscription {
+  id        String    @id @default(uuid())
+  userId    String
+  contentId String?
+  user      user      @relation(fields: [userId], references: [id])
+  content   content?  @relation(fields: [contentId], references: [id])
+  paymentId String?
+  payment   payment?  @relation(fields: [paymentId], references: [id])
+  startDate DateTime  @default(now())
+  endDate   DateTime?
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model FanEngagement {
+  id        String   @id @default(uuid())
+  userId    String
+  contentId String
+  action    String?
+  value     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      user     @relation(fields: [userId], references: [id])
+  content   content  @relation(fields: [contentId], references: [id])
+}
+
+model favourite_content {
+  id     String @id @default(cuid())
+  userId String
+  user   user   @relation(fields: [userId], references: [id])
+
+  contentId String? // Optional if favoriting content
+  content   content? @relation(fields: [contentId], references: [id])
+
+  productId String?
+  product   product? @relation(fields: [productId], references: [id])
+
+  storeId String?
+  store   store?  @relation(fields: [storeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model acknowledgement {
+  id        String   @id @default(uuid())
+  type      String
+  interval  String
+  userId    String
+  expiresOn DateTime
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  user      user     @relation(fields: [userId], references: [id])
+}

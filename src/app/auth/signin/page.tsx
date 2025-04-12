@@ -12,7 +12,7 @@ const SignIn: React.FC = () => {
       {/* Dynamic Background */}
       <div className="absolute inset-0 bg-[url('/images/bgimage.jpg')] bg-cover bg-center bg-no-repeat">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-red-950/30"></div>
-        <div className="absolute inset-0  mix-blend-overlay opacity-20"></div>
+        <div className="absolute inset-0  opacity-20 mix-blend-overlay"></div>
       </div>
 
       {/* Animated Shapes */}
@@ -25,15 +25,18 @@ const SignIn: React.FC = () => {
         {/* Header */}
         <header className="relative z-50">
           <nav className="px-4 py-6 sm:px-6 sm:py-8">
-            <Link href="/" className="group relative inline-flex items-center gap-2">
+            <Link
+              href="/"
+              className="group relative inline-flex items-center gap-2"
+            >
               <div className="relative flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12">
-                <div className="absolute inset-0 animate-spin-slow rounded-full bg-gradient-to-tr from-red-500 to-yellow-500 blur-sm"></div>
+                <div className="animate-spin-slow absolute inset-0 rounded-full bg-gradient-to-tr from-red-500 to-yellow-500 blur-sm"></div>
                 <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-black sm:h-10 sm:w-10">
                   <Flame className="h-5 w-5 text-red-500 sm:h-6 sm:w-6" />
                 </div>
               </div>
               <span className="text-xl font-bold tracking-tighter text-white sm:text-2xl">
-                Code Red Studios
+                Streamify
               </span>
             </Link>
           </nav>
@@ -64,7 +67,8 @@ const SignIn: React.FC = () => {
                       Welcome Back!
                     </h2>
                     <p className="mt-4 text-lg text-gray-300">
-                      Sign in to continue your entertainment journey with Code Red Studios
+                      Sign in to continue your entertainment journey with Code
+                      Red Studios
                     </p>
                   </div>
                 </div>
@@ -78,7 +82,8 @@ const SignIn: React.FC = () => {
           <div className="bg-black/40 backdrop-blur-sm">
             <div className="px-4 py-4 sm:px-6">
               <p className="text-center text-xs text-gray-400 sm:text-sm">
-                &copy; {new Date().getFullYear()} Code Red Studios. All rights reserved.
+                &copy; {new Date().getFullYear()} Streamify. All rights
+                reserved.
               </p>
             </div>
           </div>

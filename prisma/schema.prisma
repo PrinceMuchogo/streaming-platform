@@ -1,12 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -16,37 +9,105 @@ datasource db {
 
 model user {
   id                   String             @id @default(uuid())
-  fullname             String
   email                String             @unique @db.VarChar(255)
   password             String?
   profile_image_url    String?
   uploadedProfileImage String?
-  category String?
   imagePublicID        String?
   role                 String?
+  category String?
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
+  isOnline             Boolean?
   username             String
   acknowledgements     acknowledgement[]
+  comments             comment[]
+  commentLikes         commentLikes[]
+  commentReplies       commentReplies[]
+  favourite_videos     favourite_videos[]
+  likes                like[]
   order                order[]
   payment              payment[]
+  rating               rating[]
+  review               review[]
+  subscriptions        subscription[]
+  video                video[]
+  views                view[]
 }
 
-model content {
-  id          String   @id @default(uuid())
-  title       String
-  description String?
-  mediaUrl    String
-  thumbnailUrl String?
-  isPublished Boolean  @default(false)
-  category String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  brandId     String
+model video {
+  id               String             @id @default(uuid())
+  video_name       String?            @unique @db.VarChar(255)
+  caption          String?
+  thumbnail_url    String?
+  url              String?
+  userID           String?
+  storeID          String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  package          String?
+  video_public_ID  String?
+  likes            Int?
+  views            Int?
+  videoComments    comment[]
+  favourite_videos favourite_videos[]
+  videoLikes       like[]
+  store            store?             @relation(fields: [storeID], references: [id])
+  user             user?              @relation(fields: [userID], references: [id])
+  videoViews       view[]
+}
 
-  artistId    String
-  artist      user     @relation(fields: [artistId], references: [id])
-  store       store    @relation(fields: [brandId], references: [id])
+model package_type {
+  id            String         @id @default(uuid())
+  name          String?        @unique @db.VarChar(255)
+  interval      String?
+  amount        Decimal        @db.Decimal(12, 10)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  subscriptions subscription[]
+}
+
+model comment {
+  id             String           @id @default(uuid())
+  comment_text   String
+  videoID        String?
+  userID         String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  user           user?            @relation(fields: [userID], references: [id])
+  video          video?           @relation(fields: [videoID], references: [id])
+  commentLikes   commentLikes[]
+  commentReplies commentReplies[]
+}
+
+model like {
+  id        String   @id @default(uuid())
+  userID    String?
+  videoID   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      user?    @relation(fields: [userID], references: [id])
+  video     video?   @relation(fields: [videoID], references: [id])
+}
+
+model view {
+  id        String   @id @default(uuid())
+  userID    String?
+  videoID   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      user?    @relation(fields: [userID], references: [id])
+  video     video?   @relation(fields: [videoID], references: [id])
+}
+
+model favourite_videos {
+  id        String   @id @default(uuid())
+  videoID   String?
+  userID    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      user?    @relation(fields: [userID], references: [id])
+  video     video?   @relation(fields: [videoID], references: [id])
 }
 
 model store {
@@ -60,8 +121,7 @@ model store {
   order         order[]
   payment       payment[]
   products      product[]
-  userId String?
-  storeOwner    user? @relation(fields: [storeOwnerID], references: [id])
+  storeOwner    storeOwner? @relation(fields: [storeOwnerID], references: [id])
   video         video[]
 }
 
@@ -93,6 +153,22 @@ model productImage {
   product        product[]
 }
 
+model storeOwner {
+  id                    String   @id @default(uuid())
+  name                  String?
+  mobile                String?
+  address               String?
+  nationalID            String   @unique @db.VarChar(255)
+  accountNumber         String?
+  creditCardSecurityKey String?
+  image                 String?
+  imagePublicID         String?
+  status                String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  store                 store[]
+}
+
 model payment {
   id            String   @id @default(uuid())
   userID        String?
@@ -100,7 +176,6 @@ model payment {
   amount        Decimal  @db.Decimal(12, 10)
   paymentMethod String?
   paymentStatus String?
-  type String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   orderId       String?
@@ -135,59 +210,61 @@ model orderProducts {
   product   product? @relation(fields: [productID], references: [id])
 }
 
-model subscription {
-  id         String   @id @default(uuid())
-  userId     String
-  contentId  String?
-  artistId   String?
-
-  // One of the above must be non-null
-  user       User     @relation("UserSubscriptions", fields: [userId], references: [id])
-  content    Content? @relation(fields: [contentId], references: [id])
-  artist     User?    @relation(fields: [artistId], references: [id])
-paymentId String?
-payment payment? @relation(fields: [paymentId], references: [id])
-  startDate  DateTime @default(now())
-  endDate    DateTime?
-  isActive   Boolean  @default(true)
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-
-}
-
-
-
-model FanEngagement {
+model review {
   id        String   @id @default(uuid())
-  userId    String
-  contentId String
-  action    String?
-  value  String?   
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
-  content   Content  @relation(fields: [contentId], references: [id])
-}
-
-
-
-model favourite_content {
-  id         String   @id @default(cuid())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id])
-
-  contentId  String?  // Optional if favoriting content
-  content    Content? @relation(fields: [contentId], references: [id])
-
-  productId  String?
-  product    Product? @relation(fields: [productId], references: [id])
-
-  storeId    String?  
-  store      Store?   @relation(fields: [brandId], references: [id])
-
+  userID    String?
+  productID String?
+  review    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  product   product? @relation(fields: [productID], references: [id])
+  user      user?    @relation(fields: [userID], references: [id])
+}
 
+model rating {
+  id        String   @id @default(uuid())
+  userID    String?
+  productID String?
+  rating    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   product? @relation(fields: [productID], references: [id])
+  user      user?    @relation(fields: [userID], references: [id])
+}
+
+model commentReplies {
+  id              String   @id @default(uuid())
+  userId          String
+  parentCommentId String?
+  replyText       String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  comment         comment? @relation(fields: [parentCommentId], references: [id])
+  user            user     @relation(fields: [userId], references: [id])
+}
+
+model commentLikes {
+  id        String   @id @default(uuid())
+  userId    String
+  commentId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  comment   comment  @relation(fields: [commentId], references: [id])
+  user      user     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, commentId])
+}
+
+model syspayment {
+  id             String        @id @default(uuid())
+  subscriptionId String?
+  amount         Decimal       @db.Decimal(12, 10)
+  paymentMethod  String?
+  paymentStatus  String?
+  paymentRef     String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  subscription   subscription? @relation(fields: [subscriptionId], references: [id])
 }
 
 model subscription {
@@ -200,8 +277,16 @@ model subscription {
   updateAt     DateTime     @updatedAt
   user         user         @relation(fields: [userId], references: [id])
   package_type package_type @relation(fields: [packageId], references: [id])
-  payment      payment[]
+  payment      syspayment[]
 }
 
-
-
+model acknowledgement {
+  id        String   @id @default(uuid())
+  type      String
+  interval  String
+  userId    String
+  expiresOn DateTime
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  user      user     @relation(fields: [userId], references: [id])
+}
