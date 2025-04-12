@@ -75,3 +75,23 @@ model Product {
   updatedAt   DateTime @updatedAt
 }
 
+model Order {
+  id        String   @id @default(uuid())
+  buyerId   String
+  productId String
+  quantity  Int      @default(1)
+  total     Float
+  status    OrderStatus @default(PENDING)
+  createdAt DateTime @default(now())
+
+  buyer     User     @relation(fields: [buyerId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+
