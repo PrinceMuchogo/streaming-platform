@@ -22,12 +22,12 @@ export default function Home() {
   useEffect(() => {
     setUserInfo(session?.user!);
     const fetchVideos = async () => {
-      const response = await fetch(`/api/get-videos/${session?.user.id}`, {
-        method: "GET",
-      });
-      const data = await response.json();
-      set_video_data(data);
-      setVideos(data);
+      // const response = await fetch(`/api/get-videos/${session?.user.id}`, {
+      //   method: "GET",
+      // });
+      // const data = await response.json();
+      set_video_data([]);
+      setVideos([]);
     };
     fetchVideos();
   }, []);

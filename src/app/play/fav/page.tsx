@@ -21,11 +21,11 @@ export default function Home() {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const response = await fetch(`/api/user/fav-videos/${userInfo?.id}`, {
-        method: "GET",
-      });
-      const data: favouriteVideo[] = await response.json();
-      set_video_data(data);
+      // const response = await fetch(`/api/user/fav-videos/${userInfo?.id}`, {
+      //   method: "GET",
+      // });
+      // const data: favouriteVideo[] = await response.json();
+      set_video_data([]);
     };
     fetchVideos();
   }, []);
