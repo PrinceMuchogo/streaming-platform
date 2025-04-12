@@ -21,6 +21,7 @@ model user {
   password             String?
   profile_image_url    String?
   uploadedProfileImage String?
+  category String?
   imagePublicID        String?
   role                 String?
   createdAt            DateTime           @default(now())
@@ -31,70 +32,110 @@ model user {
   payment              payment[]
 }
 
-model Content {
+model content {
   id          String   @id @default(uuid())
   title       String
   description String?
   mediaUrl    String
   thumbnailUrl String?
   isPublished Boolean  @default(false)
+  category String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   brandId     String
 
   artistId    String
-  artist      User     @relation(fields: [artistId], references: [id])
-  brand       Brand    @relation(fields: [brandId], references: [id])
+  artist      user     @relation(fields: [artistId], references: [id])
+  store       store    @relation(fields: [brandId], references: [id])
 }
 
-model Brand {
-  id          String   @id @default(uuid())
-  name        String
-  description String?
-  logoUrl     String?
-  artistId    String
-  artist      User     @relation(fields: [artistId], references: [id])
-  products    Product[]
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model store {
+  id            String      @id @default(uuid())
+  storeName     String?     @unique @db.VarChar(255)
+  storeLogo     String?
+  imagePublicID String?
+  storeOwnerID  String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  order         order[]
+  payment       payment[]
+  products      product[]
+  userId String?
+  storeOwner    user? @relation(fields: [storeOwnerID], references: [id])
+  video         video[]
 }
 
-model Product {
-  id          String   @id @default(uuid())
-  name        String
-  description String?
-  price       Float
-  currency    String   // "USD", "ETH", etc.
-  mediaUrl    String?  // Image or preview
-  brandId     String
-  brand       Brand    @relation(fields: [brandId], references: [id])
-
-  isAvailable Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model product {
+  id             String          @id @default(uuid())
+  productName    String          @db.VarChar(255)
+  description    String          @db.VarChar(255)
+  productImageID String?
+  quantity       Int?
+  price          String          @db.VarChar(255)
+  rating         Decimal?        @db.Decimal(1, 1)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  storeId        String?
+  orderProducts  orderProducts[]
+  productImage   productImage?   @relation(fields: [productImageID], references: [productImageID])
+  store          store?          @relation(fields: [storeId], references: [id])
+  ratings        rating[]
+  reviews        review[]
 }
 
-model Order {
+model productImage {
+  id             String    @id @default(uuid())
+  productImage   String?
+  imagePublicID  String?
+  productImageID String?   @unique @db.VarChar(255)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  product        product[]
+}
+
+model payment {
+  id            String   @id @default(uuid())
+  userID        String?
+  storeID       String?
+  amount        Decimal  @db.Decimal(12, 10)
+  paymentMethod String?
+  paymentStatus String?
+  type String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  orderId       String?
+  paymentRef    String?
+  order         order?   @relation(fields: [orderId], references: [id])
+  store         store?   @relation(fields: [storeID], references: [id])
+  user          user?    @relation(fields: [userID], references: [id])
+}
+
+model order {
+  id              String          @id @default(uuid())
+  userID          String?
+  storeID         String?
+  shippingAddress String?
+  amount          Decimal         @db.Decimal(12, 10)
+  status          String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  store           store?          @relation(fields: [storeID], references: [id])
+  user            user?           @relation(fields: [userID], references: [id])
+  orderProducts   orderProducts[]
+  payment         payment[]
+}
+
+model orderProducts {
   id        String   @id @default(uuid())
-  buyerId   String
-  productId String
-  quantity  Int      @default(1)
-  total     Float
-  status    OrderStatus @default(PENDING)
+  orderID   String?
+  productID String?
   createdAt DateTime @default(now())
-
-  buyer     User     @relation(fields: [buyerId], references: [id])
-  product   Product  @relation(fields: [productId], references: [id])
+  updatedAt DateTime @updatedAt
+  order     order?   @relation(fields: [orderID], references: [id])
+  product   product? @relation(fields: [productID], references: [id])
 }
 
-enum OrderStatus {
-  PENDING
-  COMPLETED
-  CANCELLED
-}
-
-model Subscription {
+model subscription {
   id         String   @id @default(uuid())
   userId     String
   contentId  String?
@@ -104,53 +145,33 @@ model Subscription {
   user       User     @relation("UserSubscriptions", fields: [userId], references: [id])
   content    Content? @relation(fields: [contentId], references: [id])
   artist     User?    @relation(fields: [artistId], references: [id])
-
+paymentId String?
+payment payment? @relation(fields: [paymentId], references: [id])
   startDate  DateTime @default(now())
   endDate    DateTime?
   isActive   Boolean  @default(true)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
 }
 
-model Transaction {
-  id          String   @id @default(uuid())
-  userId      String
-  contentId   String?
-  amount      Float
-  currency    String   // e.g., USD, ETH, etc.
-  type        TransactionType
-  createdAt   DateTime @default(now())
 
-  user        User     @relation(fields: [userId], references: [id])
-  content     Content? @relation(fields: [contentId], references: [id])
-}
-
-enum TransactionType {
-  SUBSCRIPTION
-  DONATION
-  TIP
-  LICENSE_PURCHASE
-}
 
 model FanEngagement {
   id        String   @id @default(uuid())
   userId    String
   contentId String
-  action    EngagementAction
-  value     Int      // e.g., 10 points for a like
-
-  createdAt DateTime @default(now())
-
+  action    String?
+  value  String?   
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
   user      User     @relation(fields: [userId], references: [id])
   content   Content  @relation(fields: [contentId], references: [id])
 }
 
-enum EngagementAction {
-  LIKE
-  COMMENT
-  SHARE
-  VIEW
-}
 
-model Favorite {
+
+model favourite_content {
   id         String   @id @default(cuid())
   userId     String
   user       User     @relation(fields: [userId], references: [id])
@@ -158,15 +179,29 @@ model Favorite {
   contentId  String?  // Optional if favoriting content
   content    Content? @relation(fields: [contentId], references: [id])
 
-  productId  String?  // Optional if favoriting product
+  productId  String?
   product    Product? @relation(fields: [productId], references: [id])
 
-  brandId    String?  // Optional if favoriting brand
-  brand      Brand?   @relation(fields: [brandId], references: [id])
+  storeId    String?  
+  store      Store?   @relation(fields: [brandId], references: [id])
 
-  createdAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@unique([userId, contentId])
-  @@unique([userId, productId])
-  @@unique([userId, brandId])
 }
+
+model subscription {
+  id           String       @id @default(uuid())
+  packageId    String
+  userId       String
+  status       String
+  expiresOn    DateTime?
+  createdAt    DateTime     @default(now())
+  updateAt     DateTime     @updatedAt
+  user         user         @relation(fields: [userId], references: [id])
+  package_type package_type @relation(fields: [packageId], references: [id])
+  payment      payment[]
+}
+
+
+

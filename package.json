@@ -12,6 +12,7 @@
     "@prisma/client": "^6.6.0",
     "apexcharts": "^3.45.2",
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.0",
     "flatpickr": "^4.6.13",
     "jsonwebtoken": "^9.0.2",
     "jsvectormap": "^1.5.3",
@@ -26,9 +27,11 @@
     "react-quill": "^2.0.0",
     "react-select": "^5.8.0",
     "react-table": "^7.8.0",
+    "react-toastify": "^11.0.5",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

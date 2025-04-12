@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import "next-cloudinary/dist/cld-video-player.css";
 import { useEffect, useState } from "react";
 import { videos } from "@/types/video";
 import useStore from "@/zustand/videoStore";
@@ -64,7 +63,7 @@ export default function Home() {
                 </div>
               </div>
               <span className="text-xl font-bold tracking-tighter text-white sm:text-2xl">
-                Code Red Studios
+                Streamify
               </span>
             </Link>
           </nav>
@@ -79,16 +78,16 @@ export default function Home() {
                 <h1 className="relative">
                   <span className="absolute -left-1/4 top-1/2 h-px w-[150%] -translate-y-1/2 bg-gradient-to-r from-transparent via-red-500/50 to-transparent"></span>
                   <span className="relative block text-sm font-medium uppercase tracking-widest text-red-500 sm:text-base">
-                    Welcome to the Future of Entertainment
+                    Welcome to the Future of Artistic Content
                   </span>
                   <span className="mt-4 block text-3xl font-extrabold tracking-tight text-white sm:mt-6 sm:text-5xl md:text-6xl lg:text-7xl">
-                    Code Red Studios
+                  Streamify
                   </span>
                 </h1>
 
                 <p className="mt-6 text-base leading-relaxed text-gray-300 [text-wrap:balance] sm:mt-8 sm:text-lg">
-                  Your ultimate hub for exclusive comedy and entertainment.
-                  Stream your favorite shows and discover new laughs, all in one
+                  Your ultimate hub for exclusive artistry and entertainment.
+                  Stream your favorite music, artwork and discover new laughs, all in one
                   place, wherever you are.
                 </p>
 
@@ -171,7 +170,7 @@ export default function Home() {
           <div className="bg-black/40 backdrop-blur-sm">
             <div className="px-4 py-4 sm:px-6">
               <p className="text-center text-xs text-gray-400 sm:text-sm">
-                &copy; {new Date().getFullYear()} Code Red Studios. All rights
+                &copy; {new Date().getFullYear()} Streamify. All rights
                 reserved.
               </p>
             </div>

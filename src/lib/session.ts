@@ -6,8 +6,8 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import jsonwebtoken from "jsonwebtoken";
 import { JWT, getToken } from "next-auth/jwt";
-import prisma from "@/utils/dbconfig";
-import { SessionInterface } from "../../common.types";
+import prisma from "../utils/dbconfig";
+import { SessionInterface } from "../common.types";
 
 export const authOptions: NextAuthOptions = {
   providers: [
