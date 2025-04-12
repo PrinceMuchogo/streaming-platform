@@ -288,7 +288,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Projects\\Personal-Projects\\NextJs\\streaming-platform\\src\\generated\\prisma",
+      "value": "C:\\Users\\Zenbook\\Documents\\GitHub\\streaming-platform\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -302,7 +302,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Projects\\Personal-Projects\\NextJs\\streaming-platform\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Zenbook\\Documents\\GitHub\\streaming-platform\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

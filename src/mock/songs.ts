@@ -1,0 +1,50 @@
+export const mockSongs = [
+    {
+      id: "1",
+      title: "Midnight Rain",
+      artist: "Taylor Swift",
+      album: "Midnights",
+      cover_url: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=800&auto=format&fit=crop&q=60",
+      audio_url: "https://example.com/midnight-rain.mp3",
+      duration: 180,
+      plays: 1500000,
+      likes: 75000,
+      musicComments: [],
+      favourite_songs: [],
+      userID: "user1",
+      createdAt: new Date("2024-01-15"),
+      updatedAt: new Date("2024-01-15")
+    },
+    {
+      id: "2",
+      title: "Blinding Lights",
+      artist: "The Weeknd",
+      album: "After Hours",
+      cover_url: "https://images.unsplash.com/photo-1614613534968-6ac8a2f0f9d3?w=800&auto=format&fit=crop&q=60",
+      audio_url: "https://example.com/blinding-lights.mp3",
+      duration: 200,
+      plays: 2000000,
+      likes: 95000,
+      musicComments: [],
+      favourite_songs: [],
+      userID: "user2",
+      createdAt: new Date("2024-02-01"),
+      updatedAt: new Date("2024-02-01")
+    },
+    {
+      id: "3",
+      title: "As It Was",
+      artist: "Harry Styles",
+      album: "Harry's House",
+      cover_url: "https://images.unsplash.com/photo-1614613535229-f93aef23acb1?w=800&auto=format&fit=crop&q=60",
+      audio_url: "https://example.com/as-it-was.mp3",
+      duration: 167,
+      plays: 1800000,
+      likes: 85000,
+      musicComments: [],
+      favourite_songs: [],
+      userID: "user3",
+      createdAt: new Date("2024-03-01"),
+      updatedAt: new Date("2024-03-01")
+    }
+  ];

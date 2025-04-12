@@ -20,7 +20,7 @@ export default function NotLoggedIn() {
               href="#"
               className="block flex-shrink-0 transition-transform hover:scale-105"
             >
-              Code Red Studio
+              Streamify
             </Link>
           </div>
         </header>
@@ -32,14 +32,12 @@ export default function NotLoggedIn() {
             {/* <span className="block text-lg font-medium md:text-2xl">
               Welcome to
             </span> */}
-            <span className="mt-2 block text-4xl md:text-5xl">
-              Code Red Studios
-            </span>
+            <span className="mt-2 block text-4xl md:text-5xl">Streamify</span>
           </h1>
           <h2 className="mt-4 w-[80%] max-w-md text-base font-normal leading-relaxed md:text-2xl">
-            Your ultimate hub for exclusive comedy and entertainment. Stream
-            your favorite shows and discover new laughs, all in one place,
-            wherever you are.
+            Your ultimate hub for exclusive artistry and entertainment. Stream
+            your favorite music, artwork and discover new laughs, all in one
+            place, wherever you are.
           </h2>
 
           <div className="mt-6 w-full max-w-md">
@@ -58,7 +56,7 @@ export default function NotLoggedIn() {
 
         {/* Footer */}
         <footer className="absolute bottom-0 left-0 w-full bg-black bg-opacity-80 p-4 text-center text-gray-400">
-          <p>&copy; 2024 Code Red Studios. All Rights Reserved.</p>
+          <p>&copy; 2025 Streamify. All Rights Reserved.</p>
         </footer>
       </div>
     </div>

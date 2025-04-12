@@ -20,7 +20,7 @@ export default function NotFound() {
               href="#"
               className="block flex-shrink-0 transition-transform hover:scale-105"
             >
-              Code Red Studios
+              Streamify
             </Link>
           </div>
         </header>
@@ -28,7 +28,9 @@ export default function NotFound() {
         {/* Main Section */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white md:px-8">
           <h1 className="max-w-xl text-3xl font-extrabold md:text-5xl">
-            Fun and relaxing comedy from code red studios
+            Your ultimate hub for exclusive artistry and entertainment. Stream
+            your favorite music, artwork and discover new laughs, all in one
+            place, wherever you are.
           </h1>
           <h2 className="mt-4 text-lg font-medium md:text-2xl">
             Watch anywhere. Welcome
@@ -50,7 +52,7 @@ export default function NotFound() {
 
         {/* Footer */}
         <footer className="absolute bottom-0 left-0 w-full bg-black bg-opacity-80 p-4 text-center text-gray-400">
-          <p>&copy; 2024 Code Red Studios. All Rights Reserved.</p>
+          <p>&copy; 2025 Streamify. All Rights Reserved.</p>
         </footer>
       </div>
     </div>
