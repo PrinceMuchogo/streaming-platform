@@ -37,6 +37,7 @@ model user {
   favourite_content    favourite_content[]
   review               review[]
   rating               rating[]
+  isOnline Boolean @default(false)
 }
 
 model content {
