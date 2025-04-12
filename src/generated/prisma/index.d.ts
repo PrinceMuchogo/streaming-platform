@@ -2462,6 +2462,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     username: string | null
+    isOnline: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2477,6 +2478,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     username: string | null
+    isOnline: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2492,6 +2494,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     username: number
+    isOnline: number
     _all: number
   }
 
@@ -2509,6 +2512,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     username?: true
+    isOnline?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2524,6 +2528,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     username?: true
+    isOnline?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2539,6 +2544,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     username?: true
+    isOnline?: true
     _all?: true
   }
 
@@ -2627,6 +2633,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     username: string
+    isOnline: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2659,6 +2666,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     username?: boolean
+    isOnline?: boolean
     acknowledgements?: boolean | user$acknowledgementsArgs<ExtArgs>
     order?: boolean | user$orderArgs<ExtArgs>
     payment?: boolean | user$paymentArgs<ExtArgs>
@@ -2685,6 +2693,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     username?: boolean
+    isOnline?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type userSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2700,6 +2709,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     username?: boolean
+    isOnline?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type userSelectScalar = {
@@ -2715,9 +2725,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     username?: boolean
+    isOnline?: boolean
   }
 
-  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "password" | "profile_image_url" | "uploadedProfileImage" | "category" | "imagePublicID" | "role" | "createdAt" | "updatedAt" | "username", ExtArgs["result"]["user"]>
+  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "password" | "profile_image_url" | "uploadedProfileImage" | "category" | "imagePublicID" | "role" | "createdAt" | "updatedAt" | "username" | "isOnline", ExtArgs["result"]["user"]>
   export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     acknowledgements?: boolean | user$acknowledgementsArgs<ExtArgs>
     order?: boolean | user$orderArgs<ExtArgs>
@@ -2761,6 +2772,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       username: string
+      isOnline: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3206,6 +3218,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"user", 'DateTime'>
     readonly updatedAt: FieldRef<"user", 'DateTime'>
     readonly username: FieldRef<"user", 'String'>
+    readonly isOnline: FieldRef<"user", 'Boolean'>
   }
     
 
@@ -19168,7 +19181,8 @@ export namespace Prisma {
     role: 'role',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    username: 'username'
+    username: 'username',
+    isOnline: 'isOnline'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -19479,6 +19493,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"user"> | Date | string
     updatedAt?: DateTimeFilter<"user"> | Date | string
     username?: StringFilter<"user"> | string
+    isOnline?: BoolFilter<"user"> | boolean
     acknowledgements?: AcknowledgementListRelationFilter
     order?: OrderListRelationFilter
     payment?: PaymentListRelationFilter
@@ -19504,6 +19519,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     username?: SortOrder
+    isOnline?: SortOrder
     acknowledgements?: acknowledgementOrderByRelationAggregateInput
     order?: orderOrderByRelationAggregateInput
     payment?: paymentOrderByRelationAggregateInput
@@ -19532,6 +19548,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"user"> | Date | string
     updatedAt?: DateTimeFilter<"user"> | Date | string
     username?: StringFilter<"user"> | string
+    isOnline?: BoolFilter<"user"> | boolean
     acknowledgements?: AcknowledgementListRelationFilter
     order?: OrderListRelationFilter
     payment?: PaymentListRelationFilter
@@ -19557,6 +19574,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     username?: SortOrder
+    isOnline?: SortOrder
     _count?: userCountOrderByAggregateInput
     _max?: userMaxOrderByAggregateInput
     _min?: userMinOrderByAggregateInput
@@ -19578,6 +19596,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"user"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"user"> | Date | string
     username?: StringWithAggregatesFilter<"user"> | string
+    isOnline?: BoolWithAggregatesFilter<"user"> | boolean
   }
 
   export type contentWhereInput = {
@@ -20588,6 +20607,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
@@ -20613,6 +20633,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
@@ -20638,6 +20659,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
@@ -20663,6 +20685,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
@@ -20688,6 +20711,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
   }
 
   export type userUpdateManyMutationInput = {
@@ -20703,6 +20727,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type userUncheckedUpdateManyInput = {
@@ -20718,6 +20743,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type contentCreateInput = {
@@ -21786,6 +21812,11 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type AcknowledgementListRelationFilter = {
     every?: acknowledgementWhereInput
     some?: acknowledgementWhereInput
@@ -21904,6 +21935,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     username?: SortOrder
+    isOnline?: SortOrder
   }
 
   export type userMaxOrderByAggregateInput = {
@@ -21919,6 +21951,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     username?: SortOrder
+    isOnline?: SortOrder
   }
 
   export type userMinOrderByAggregateInput = {
@@ -21934,6 +21967,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     username?: SortOrder
+    isOnline?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -21986,9 +22020,12 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -22041,14 +22078,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     storeId?: SortOrder
     artistId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ProductListRelationFilter = {
@@ -22784,6 +22813,10 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type acknowledgementUpdateManyWithoutUserNestedInput = {
     create?: XOR<acknowledgementCreateWithoutUserInput, acknowledgementUncheckedCreateWithoutUserInput> | acknowledgementCreateWithoutUserInput[] | acknowledgementUncheckedCreateWithoutUserInput[]
     connectOrCreate?: acknowledgementCreateOrConnectWithoutUserInput | acknowledgementCreateOrConnectWithoutUserInput[]
@@ -23116,10 +23149,6 @@ export namespace Prisma {
     connectOrCreate?: favourite_contentCreateOrConnectWithoutContentInput | favourite_contentCreateOrConnectWithoutContentInput[]
     createMany?: favourite_contentCreateManyContentInputEnvelope
     connect?: favourite_contentWhereUniqueInput | favourite_contentWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type userUpdateOneRequiredWithoutContentNestedInput = {
@@ -24209,6 +24238,11 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -24277,11 +24311,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -25036,6 +25065,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
@@ -25060,6 +25090,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
@@ -25225,6 +25256,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
@@ -25249,6 +25281,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
@@ -25476,6 +25509,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
@@ -25500,6 +25534,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
@@ -25674,6 +25709,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
@@ -25698,6 +25734,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
@@ -26183,6 +26220,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     content?: contentCreateNestedManyWithoutArtistInput
@@ -26207,6 +26245,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     content?: contentUncheckedCreateNestedManyWithoutArtistInput
@@ -26357,6 +26396,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     content?: contentUpdateManyWithoutArtistNestedInput
@@ -26381,6 +26421,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     content?: contentUncheckedUpdateManyWithoutArtistNestedInput
@@ -26456,6 +26497,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
     content?: contentCreateNestedManyWithoutArtistInput
@@ -26480,6 +26522,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
     content?: contentUncheckedCreateNestedManyWithoutArtistInput
@@ -26623,6 +26666,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
     content?: contentUpdateManyWithoutArtistNestedInput
@@ -26647,6 +26691,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
     content?: contentUncheckedUpdateManyWithoutArtistNestedInput
@@ -26847,6 +26892,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
@@ -26871,6 +26917,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
@@ -26981,6 +27028,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
@@ -27005,6 +27053,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
@@ -27111,6 +27160,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
@@ -27135,6 +27185,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
@@ -27212,6 +27263,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
@@ -27236,6 +27288,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
@@ -27303,6 +27356,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
@@ -27327,6 +27381,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
@@ -27476,6 +27531,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
@@ -27500,6 +27556,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
@@ -27651,6 +27708,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
     content?: contentCreateNestedManyWithoutArtistInput
@@ -27675,6 +27733,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
     content?: contentUncheckedCreateNestedManyWithoutArtistInput
@@ -27715,6 +27774,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
     content?: contentUpdateManyWithoutArtistNestedInput
@@ -27739,6 +27799,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
     content?: contentUncheckedUpdateManyWithoutArtistNestedInput
@@ -27800,6 +27861,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
@@ -27824,6 +27886,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
@@ -27907,6 +27970,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
@@ -27931,6 +27995,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
@@ -27992,6 +28057,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementCreateNestedManyWithoutUserInput
     order?: orderCreateNestedManyWithoutUserInput
     payment?: paymentCreateNestedManyWithoutUserInput
@@ -28016,6 +28082,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     username: string
+    isOnline?: boolean
     acknowledgements?: acknowledgementUncheckedCreateNestedManyWithoutUserInput
     order?: orderUncheckedCreateNestedManyWithoutUserInput
     payment?: paymentUncheckedCreateNestedManyWithoutUserInput
@@ -28099,6 +28166,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUpdateManyWithoutUserNestedInput
     order?: orderUpdateManyWithoutUserNestedInput
     payment?: paymentUpdateManyWithoutUserNestedInput
@@ -28123,6 +28191,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     acknowledgements?: acknowledgementUncheckedUpdateManyWithoutUserNestedInput
     order?: orderUncheckedUpdateManyWithoutUserNestedInput
     payment?: paymentUncheckedUpdateManyWithoutUserNestedInput
