@@ -16,6 +16,7 @@ datasource db {
 
 model user {
   id                   String             @id @default(uuid())
+  fullname             String
   email                String             @unique @db.VarChar(255)
   password             String?
   profile_image_url    String?
@@ -24,19 +25,53 @@ model user {
   role                 String?
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
-  isOnline             Boolean?
   username             String
   acknowledgements     acknowledgement[]
-  comments             comment[]
-  commentLikes         commentLikes[]
-  commentReplies       commentReplies[]
-  favourite_videos     favourite_videos[]
-  likes                like[]
   order                order[]
   payment              payment[]
-  rating               rating[]
-  review               review[]
-  subscriptions        subscription[]
-  video                video[]
-  views                view[]
 }
+
+model Content {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  mediaUrl    String
+  thumbnailUrl String?
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  brandId     String
+
+  artistId    String
+  artist      User     @relation(fields: [artistId], references: [id])
+  brand       Brand    @relation(fields: [brandId], references: [id])
+}
+
+model Brand {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  logoUrl     String?
+  artistId    String
+  artist      User     @relation(fields: [artistId], references: [id])
+  products    Product[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Float
+  currency    String   // "USD", "ETH", etc.
+  mediaUrl    String?  // Image or preview
+  brandId     String
+  brand       Brand    @relation(fields: [brandId], references: [id])
+
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
