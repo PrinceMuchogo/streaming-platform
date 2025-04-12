@@ -189,6 +189,7 @@ export default function Signup() {
                     >
                       <option value="">Select if you are an artist</option>
                       <option value="artist">Artist</option>
+                      <option value="user">Fan</option>
                     </select>
                     {formData.role == "artist" && (
                       <select

@@ -14,7 +14,7 @@ export type User = {
     role: string
     createdAt: Date
     updatedAt: Date
-    isOnline: boolean
+    isOnline?: boolean
     username: string
     comments: []
     favourite_videos: []

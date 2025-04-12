@@ -321,7 +321,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://streaming-platform_owner:npg_VB9nK0vgNEsY@ep-mute-frost-a56ghs41-pooler.us-east-2.aws.neon.tech/streaming-platform?sslmode=require"
+        "value": "postgresql://postgres:troyprince01@localhost:5432/stream"
       }
     }
   },
