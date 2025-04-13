@@ -289,7 +289,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Projects\\Personal-Projects\\NextJs\\streaming-platform\\src\\generated\\prisma",
+      "value": "C:\\Users\\Zenbook\\Documents\\GitHub\\streaming-platform\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -303,7 +303,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Projects\\Personal-Projects\\NextJs\\streaming-platform\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Zenbook\\Documents\\GitHub\\streaming-platform\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -321,7 +321,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:troyprince01@localhost:5432/stream"
+        "value": "postgresql://streaming-platform_owner:npg_VB9nK0vgNEsY@ep-mute-frost-a56ghs41-pooler.us-east-2.aws.neon.tech/streaming-platform?sslmode=require"
       }
     }
   },
